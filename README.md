@@ -12,5 +12,5 @@ Run:
 5. Open Swagger UI: http://127.0.0.1:8000/docs
 
 
-# See Demo: ocialmedia-fastapi-smjb.onrender.com/docs
- 
+# See Demo: 
+https://socialmedia-fastapi-smjb.onrender.com/docs 
