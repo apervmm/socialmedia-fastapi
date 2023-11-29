@@ -67,7 +67,7 @@ def delete_post(id: int,
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"{id} DNE")
     if post.owner_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
-                            detail=f"Not authorized to perform requested action")
+                            detail="Not authorized to perform requested action")
 
     post_query.delete(synchronize_session=False)
     db.commit()
@@ -84,7 +84,7 @@ def update_post(id: int, post: schemas.PostCreate,
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"{id} DNE")
     if postq.owner_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
-                            detail=f"Not authorized to perform requested action")
+                            detail="Not authorized to perform requested action")
     post_query.update(post.model_dump(), synchronize_session=False)
     db.commit()
     return post_query.first()
