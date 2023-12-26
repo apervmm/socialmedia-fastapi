@@ -62,8 +62,7 @@ def delete_post(id: int,
                 db: Session = Depends(get_db),
                 current_user: int = Depends(oauth2.get_current_user)):
     post_query = db.query(models.Post).filter(models.Post.id == id)
-    post = post_query.first()
-    if post == None:
+    if (post := post_query.first()) == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"{id} DNE")
     if post.owner_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
@@ -79,8 +78,7 @@ def update_post(id: int, post: schemas.PostCreate,
                 db: Session = Depends(get_db), 
                 current_user: int = Depends(oauth2.get_current_user)):  
     post_query = db.query(models.Post).filter(models.Post.id == id)
-    postq = post_query.first()
-    if postq == None:
+    if (postq := post_query.first()) == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"{id} DNE")
     if postq.owner_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
